@@ -1,0 +1,3 @@
+InvPend.pdf ... http://www.cas.mcmaster.ca/~qiao/courses/cs4xo3/presentations/InvPend.pdf
+lab_Inverted Pendulum_S05.pdf ... http://www.ece.utah.edu/~ece3510/lab_Inverted%20Pendulum_S05.pdf
+LMIP.pdf ... http://www.ualberta.ca/~robles/LMIP.pdf
