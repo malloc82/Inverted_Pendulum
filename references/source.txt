@@ -1,3 +1,9 @@
+Docs:
 InvPend.pdf ... http://www.cas.mcmaster.ca/~qiao/courses/cs4xo3/presentations/InvPend.pdf
 lab_Inverted Pendulum_S05.pdf ... http://www.ece.utah.edu/~ece3510/lab_Inverted%20Pendulum_S05.pdf
 LMIP.pdf ... http://www.ualberta.ca/~robles/LMIP.pdf
+InvertedPendulumOnCartSolution.pdf ... http://www.stanford.edu/class/me161/documents/InvertedPendulumOnCartSolution.pdf
+Ph3.Chapter.TheInvertedPendulum.pdf ... http://www.ligo.caltech.edu/~vsanni/ph3/TheInvertedPendulum/Ph3.Chapter.TheInvertedPendulum.pdf
+
+Video:
+http://www.spumone.org/courses/control-notes/inverted-pendulum/
