@@ -1,0 +1,30 @@
+\documentclass{notes}
+\author{Ritchie Cai, Matthew Mosley \& Corey Higgins}
+\title{Inverted Pendulumn Modeling}
+
+\begin{document}
+\maketitle 
+
+\section{Description}
+Our design project is to simulate and implement a inverted pendulum using 
+$\text{Lego Mindstorm EV3}^{\textregistered}$. 
+
+\section{Physical Model}
+
+\marginpar{add picture here}
+
+The rod on top of the cart can only lean forward and backward. 
+Base cart also can move only move back and forth. 
+When the rod is out of balance and leaning toward one side, the cart will accelerate toward the same
+direction to make sure the rod is back to resting position relative to the cart.
+
+\section{Mathematical Model}
+
+One the horizontal, x-axis, we have:
+\begin{align*}
+  F_x & = F_{cart} + F_{rod} \\
+  F_{cart} & = M\ddot{x}
+\end{align*}
+
+
+\end{document}
