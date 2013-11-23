@@ -110,6 +110,8 @@ Using Newton's second law for the vertical motion of the pendulum gives
  \begin{align*}
    F_y & = mg + m\left(-l/2\cos\theta\left(\frac{d\theta}{dt}\right) - l/2\sin\theta\frac{d^2\theta}{dt^2}\right)
  \end{align*}
+ \subsection{}
+ 
  
  For any object, the relationship between the moment applied on an object and its angular acceleration is given by the following relationship
  \begin{align}
@@ -123,6 +125,11 @@ Using Newton's second law for the vertical motion of the pendulum gives
  \end{align*}
  
  where $\vec{F}$ is the force vector, $\vec{r}$ is the position vector of the object with respect to the point about which the moments are being summed, and $I$ is the angular momentum of the object. For the pendulum, summing the moment around the center of gravity, Equation~\ref{eqn:eq3} can be written as
+ \begin{align*}
+   I\ddot{\theta} & = F_yl\sin\theta - F_xl\cos\theta \\
+   I\ddot{\theta} & = (mg + m(-l\ddot{\theta}\cos\theta - l\ddot{\theta}\sin\theta))l\sin\theta 
+   -m(\ddot{x} - \ddot{\theta}l\sin\theta + \ddot{\theta}l\cos\theta)l\cos\theta
+ \end{align*}
 
 
 \end{document}
