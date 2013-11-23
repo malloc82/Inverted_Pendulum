@@ -182,24 +182,26 @@ there is no angular movement of the rod around it's center. Therefore:
 
 \begin{align}
   I\ddot{\theta} & = 0 \nonumber\\
-  mgl\sin\theta - ml^2\ddot{\theta} - ml\ddot{x}\cos\theta  & = 0 \nonumber\\
-  g\sin\theta - l\ddot{\theta} - \ddot{x}\cos\theta & = 0 \label{eqn:pre_tf}
+  m \dfrac{L^2}{4}\ddot{\theta} - \dfrac{L}{2}mg\sin\theta 
+      - m \dfrac{L}{2} \ddot{x}\cos\theta  & = 0 \nonumber\\
+  \dfrac{L}{2}\ddot{\theta} - g\sin\theta - \ddot{x}\cos\theta & = 0 \label{eqn:pre_tf}
 \end{align}
-
-
 
 Using linear approximation, we approximate:
 
 \begin{align*}
-  g\sin\theta - l\ddot{\theta} - \ddot{x}\cos\theta & = 0
-  \begin{cases}
+  \dfrac{L}{2}\ddot{\theta} - g\theta - \ddot{x} & = 0 \\
+  & \begin{cases}
     \sin\theta \approx \theta \\
     \cos\theta \approx 1
   \end{cases}
 \end{align*}
  
-Taking Laplace transform of equation~\ref{eqn:pre_tf}, we have: 
+\noindent Taking Laplace transform of equation~\ref{eqn:pre_tf}, we have: 
 
-
-
+\begin{align*}
+  \dfrac{L}{2}s^2\Theta - g\Theta & = U \\
+  \Theta & = \dfrac{\frac{2}{L}}{s^2 - \frac{2g}{L}}U
+\end{align*}
+where $U$ is an input acceleration (replacing $\ddot{x}$)
 \end{document}
