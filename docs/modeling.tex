@@ -11,14 +11,23 @@ $\text{Lego Mindstorm EV3}^{\textregistered}$.
 
 \section{Physical Model}
 
-\marginpar{add picture here}
-
 The rod on top of the cart can only lean forward and backward. 
 Base cart also can move only move back and forth. 
 When the rod is out of balance and leaning toward one side, the cart will accelerate toward the same
 direction to make sure the rod is back to resting position relative to the cart.
 
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=3.5in]{pics/full_system.eps}
+  \end{center}
+  \caption{System setup for inverted pendulum}
+  \label{fig:full_system}
+\end{figure}
+
+
 \section{Mathematical Model}
+
+
 
 \subsection{X-axis}
 One the horizontal, x-axis, we have:
@@ -26,8 +35,54 @@ One the horizontal, x-axis, we have:
 \begin{align*}
   F_x & = F_{cart} + F_{rod} \\
   F_{cart} & = M\ddot{x}  \\
-  F_{rod} &  = m\ddot{x} + 
+  F_{rod}  & = m a_x + m a_{p} \\
+          & = m \ddot{x} + m (a_{t} + a_{c})
 \end{align*}
+
+where $a_x$, $a_t$ and $a_c$ are acceleration of x-axis, tangential and centripical respectively. 
+
+\begin{figure}[!h]
+  \begin{center}
+    \begin{minipage}[b]{3.5in}
+      \centerline{\mbox{\includegraphics[width=3.5in]{pics/rod.eps}}}
+    \end{minipage}
+    \begin{minipage}[b]{3.5in}
+      \centerline{\mbox{\includegraphics[width=3.5in]{pics/rod_acceleration.eps}}}
+    \end{minipage}
+    
+  \end{center}
+  \caption{Angular acceleration disection for the rod}
+  \label{fig:angular_rod}
+\end{figure}
+
+According to figure~\ref{fig:angular_rod}, angular accelerations for the rod on x-axis can be
+expressed as:
+\begin{align*}
+  a_t & = -\dfrac{L}{2} \ddot{\theta} \\
+  a_c & = -\dfrac{L}{2} \dot{\theta}^2
+\end{align*}
+
+Since we are only interested in the components on the x-axis, we have:
+
+\begin{align*}
+  a_t & = -\dfrac{L}{2} \ddot{\theta} \cos \theta \\
+  a_c & = -\dfrac{L}{2} \dot{\theta}^2 \sin \theta
+\end{align*}
+
+So 
+
+\begin{align*}
+  F_{rod} & = m \ddot{x} + m (a_{t} + a_{c}) \\
+         & = m \ddot{x} -m\dfrac{L}{2} \ddot{\theta} \cos \theta 
+                        -m\dfrac{L}{2} \dot{\theta}^2 \sin \theta \\
+  F_x & = F_{cart} + F_{rod} \\
+      & = M\ddot{x} + m \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
+                    - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta \\
+      & = (M + m) \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
+                    - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta
+\end{align*}
+\FloatBarrier
+
 
 \subsection{Y-axis}
 Using Newton's second law for the vertical motion of the pendulum gives
