@@ -32,10 +32,29 @@ One the horizontal, x-axis, we have:
 \subsection{Y-axis}
 Using Newton's second law for the vertical motion of the pendulum gives
 
-\begin{align*}
-  F_y - mg & = m\frac{d^2y_G}{dt^2}
-  
+\begin{align}
+  F_y - mg & = m\frac{d^2y_G}{dt^2}\label{eqn:eq1}
+ \end{align}
+ 
+ Since $ y_G = l/2\cos(\theta)$,
+
+ \begin{align}
+   \frac{dy_G}{dt} & = \frac{d(l/2\cos\theta)}{dt} = -l/2\sin\theta\frac{d\theta}{dt} \nonumber\\
+   \frac{d^2y_G}{dt^2} & = \frac{d}{dt}\left(-l/2/2 \sin\theta \frac{d\theta}{dt}\right) \nonumber\\
+   & = -l/2/2\left(\frac{d\sin\theta}{dt}\frac{d\theta}{dt} + \sin\theta\frac{d^2\theta}{dt^2}\right) \nonumber\\
+   & = -l/2\left( \cos\theta \left(\frac{d\theta}{dt}\right)^2 + \sin\theta\frac{d^2\theta}{dt^2}   \right) \nonumber\\
+   & = -l/2\cos\theta\left(\frac{d\theta}{dt}\right)^2-l/2\sin\theta\frac{d^2\theta}{dt^2}\label{eqn:eq2}
+ \end{align}
+ 
+ Using Equation~\ref{eqn:eq2}, Equation~\ref{eqn:eq1} can be written as 
+ \begin{align*}
+   F_y - mg & = m\left(-l/2\cos\theta\left(\frac{d\theta}{dt}\right) - l/2\sin\theta\frac{d^2\theta}{dt^2}\right)
  \end{align*}
+ 
+ Thus, the vertical reaction force, $F_y$, can be written as
+ \begin{align}
+   F_y & = mg + m\left(-l/2\cos\theta\left(\frac{d\theta}{dt}\right) - l/2\sin\theta\frac{d^2\theta}{dt^2}\right)
+ \end{align}
 
 
 \end{document}
