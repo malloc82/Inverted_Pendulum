@@ -1,4 +1,6 @@
 \documentclass{notes}
+\usepackage[makeroom]{cancel}
+
 \author{Ritchie Cai, Matthew Mosley \& Corey Higgins}
 \title{Inverted Pendulumn Modeling}
 
@@ -33,13 +35,14 @@ direction to make sure the rod is back to resting position relative to the cart.
 One the horizontal, x-axis, we have:
 
 \begin{align*}
-  F_x & = F_{cart} + F_{rod} \\
-  F_{cart} & = M\ddot{x}  \\
-  F_{rod}  & = m a_x + m a_{p} \\
-          & = m \ddot{x} + m (a_{t} + a_{c})
+  % F_x & = F_{cart} + F_{rod} \\
+  % F_{cart} & = M\ddot{x}  \\
+  % F_{rod}  & = m a_x + m a_{p} \\
+  %         & = m \ddot{x} + m (a_{t} + a_{c})
+    F_x & = m \ddot{x} + m (a_{t} + a_{c})
 \end{align*}
 
-where $a_x$, $a_t$ and $a_c$ are acceleration of x-axis, tangential and centripical respectively. 
+where $a_t$ and $a_c$ are tangential and centripetal acceleration respectively. 
 
 \begin{figure}[!h]
   \begin{center}
@@ -71,65 +74,132 @@ Since we are only interested in the components on the x-axis, we have:
 
 So 
 
-\begin{align*}
-  F_{rod} & = m \ddot{x} + m (a_{t} + a_{c}) \\
+\begin{align}
+  F_x  & = m \ddot{x} + m (a_{t} + a_{c}) \nonumber\\
          & = m \ddot{x} -m\dfrac{L}{2} \ddot{\theta} \cos \theta 
-                        -m\dfrac{L}{2} \dot{\theta}^2 \sin \theta \\
-  F_x & = F_{cart} + F_{rod} \\
-      & = M\ddot{x} + m \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
-                    - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta \\
-      & = (M + m) \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
-                    - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta
-\end{align*}
+                        -m\dfrac{L}{2} \dot{\theta}^2 \sin \theta \label{eqn:f_x}
+      % & = (M + m) \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
+      %               - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta \label{eqn:f_x}
+\end{align}
 \FloatBarrier
 
 
 \subsection{Y-axis}
 Using Newton's second law for the vertical motion of the pendulum gives
 
-\begin{align}
-  F_y - mg & = m\frac{d^2y_G}{dt^2}\label{eqn:eq1}
- \end{align}
- 
- Since $ y_G = l/2\cos(\theta)$,
+\begin{align*}
+  % F_y & = ma_y - mg \label{eqn:eq1} \\
+  F_y & = ma_y - mg \\
+      & = m(a_t + a_c) - mg
+\end{align*}
+where $a_y$, $a_t$ and $a_c$ are acceleration of y-axis, tangential and centripetal of the rotation
+respectively. 
 
- \begin{align}
-   \frac{dy_G}{dt} & = \frac{d(l/2\cos\theta)}{dt} = -l/2\sin\theta\frac{d\theta}{dt} \nonumber\\
-   \frac{d^2y_G}{dt^2} & = \frac{d}{dt}\left(-l/2/2 \sin\theta \frac{d\theta}{dt}\right) \nonumber\\
-   & = -l/2/2\left(\frac{d\sin\theta}{dt}\frac{d\theta}{dt} + \sin\theta\frac{d^2\theta}{dt^2}\right) \nonumber\\
-   & = -l/2\left( \cos\theta \left(\frac{d\theta}{dt}\right)^2 + \sin\theta\frac{d^2\theta}{dt^2}   \right) \nonumber\\
-   & = -l/2\cos\theta\left(\frac{d\theta}{dt}\right)^2-l/2\sin\theta\frac{d^2\theta}{dt^2}\label{eqn:eq2}
- \end{align}
+Using figure~\ref{fig:angular_rod}, we can express the acceleration on y-axis with:
+\begin{align*}
+  a_t & = \dfrac{L}{2}\ddot{\theta}\sin\theta \\
+  a_c & = -\dfrac{L}{2}\dot{\theta}^2\cos\theta
+\end{align*}
+
+So
+
+\begin{align}
+  F_y & = m(a_t + a_c) - mg \nonumber\\
+      & = m(\dfrac{L}{2}\ddot{\theta}\sin\theta - \dfrac{L}{2}\dot{\theta}^2\cos\theta) - mg
+      \nonumber\\ 
+      & = m\dfrac{L}{2}\ddot{\theta}\sin\theta - m\dfrac{L}{2}\dot{\theta}^2\cos\theta - mg
+       \label{eqn:f_y}
+\end{align}
+
+ % Since $ y = \dfrac{L}{2}\cos\theta$,
+
+ % \begin{align}
+ %   \dot{y} & = \frac{d(l/2\cos\theta)}{dt} = -\dfrac{L}{2}\ddot{\theta}\sin\theta \nonumber\\
+ %   % \frac{dy_G}{dt} & = \frac{d(l/2\cos\theta)}{dt} = -l/2\sin\theta\frac{d\theta}{dt} \nonumber\\
+ %   \frac{d^2y_G}{dt^2} & = \frac{d}{dt}\left(-l/2/2 \sin\theta \frac{d\theta}{dt}\right) \nonumber\\
+ %   & = -l/2/2\left(\frac{d\sin\theta}{dt}\frac{d\theta}{dt} + \sin\theta\frac{d^2\theta}{dt^2}\right) \nonumber\\
+ %   & = -l/2\left( \cos\theta \left(\frac{d\theta}{dt}\right)^2 + \sin\theta\frac{d^2\theta}{dt^2}   \right) \nonumber\\
+ %   & = -l/2\cos\theta\left(\frac{d\theta}{dt}\right)^2-l/2\sin\theta\frac{d^2\theta}{dt^2}\label{eqn:eq2}
+ % \end{align}
  
- Using Equation~\ref{eqn:eq2}, Equation~\ref{eqn:eq1} can be written as 
- \begin{align*}
-   F_y - mg & = m(-\frac{L}{2}\dot{\theta}^2\cos\theta - \frac{L}{2}\ddot{\theta}\sin\theta )
- \end{align*}
+ % Using Equation~\ref{eqn:eq2}, Equation~\ref{eqn:eq1} can be written as 
+ % \begin{align*}
+ %   F_y - mg & = m(-\frac{L}{2}\dot{\theta}^2\cos\theta - \frac{L}{2}\ddot{\theta}\sin\theta )
+ % \end{align*}
  
- Thus, the vertical reaction force, $F_y$, can be written as
- \begin{align*}
-   F_y & = mg + m\left(-\frac{L}{2}\dot{\theta}^2\cos\theta - \frac{L}{2}\ddot{\theta}\sin\theta\right)
- \end{align*}
- \subsection{}
- 
+ % Thus, the vertical reaction force, $F_y$, can be written as
+ % \begin{align*}
+ %   F_y & = mg + m\left(-\frac{L}{2}\dot{\theta}^2\cos\theta - \frac{L}{2}\ddot{\theta}\sin\theta\right)
+ % \end{align*}
+
+ \subsection{Angular Momentum}
  
  For any object, the relationship between the moment applied on an object and its angular acceleration is given by the following relationship
  \begin{align}
-   \sum \overline{M} = I \ddot{\theta}\label{eqn:eq3}
+   I \ddot{\theta} = \sum \overline{M} \label{eqn:torque}
  \end{align}
  
  where $\overline{M}$ is the moment due to a given force and defined as 
  
- \begin{align*}
-   \overline{M} = \vec{F} \times \vec{r}
- \end{align*}
+ \[
+ \overline{M} = \vec{F} \times \vec{r}
+ \]
  
- where $\vec{F}$ is the force vector, $\vec{r}$ is the position vector of the object with respect to the point about which the moments are being summed, and $I$ is the angular momentum of the object. For the pendulum, summing the moment around the center of gravity, Equation~\ref{eqn:eq3} can be written as
- \begin{align*}
-   I\ddot{\theta} & = F_yl\sin\theta - F_xl\cos\theta \\
-   I\ddot{\theta} & = (mg + m(-l\ddot{\theta}\cos\theta - l\ddot{\theta}\sin\theta))l\sin\theta 
-   -m(\ddot{x} - \ddot{\theta}l\sin\theta + \ddot{\theta}l\cos\theta)l\cos\theta
- \end{align*}
+ where $\vec{F}$ is the force vector, $\vec{r}$ is the position vector of the object with respect to
+ the point about which the moments are being summed, and $I$ is the angular momentum of the object.
+ For the pendulum, summing the moment around the center of gravity, Equation~\ref{eqn:torque} can be
+ written as
+
+ \begin{eqnarray*}
+   I\ddot{\theta} & = & F_y\dfrac{L}{2}\sin\theta - F_x\dfrac{L}{2}\cos\theta \\
+     & = & \left( m\dfrac{L}{2}\ddot{\theta}\sin\theta - m\dfrac{L}{2}\dot{\theta}^2\cos\theta 
+            - mg\right) \dfrac{L}{2}\sin\theta \\
+     &   & -\left( m\ddot{x} - m\dfrac{L}{2}\ddot{\theta}\cos\theta - 
+             m\dfrac{L}{2}\dot{\theta}^2\sin\theta \right) \dfrac{L}{2}\cos\theta\\
+     & = & m\dfrac{L^2}{4}\ddot{\theta}\sin^2\theta 
+           - \cancel{m\dfrac{L^2}{4}\dot{\theta}^2\cos\theta\sin\theta} - \dfrac{L}{2}mg\sin\theta\\
+     &   & - m \dfrac{L}{2} \ddot{x}\cos\theta + m\dfrac{L^2}{4}\ddot{\theta}\cos^2\theta + 
+             \cancel{m\dfrac{L^2}{4}\dot{\theta}^2\sin\theta\cos\theta} \\
+     & = & m\dfrac{L^2}{4}\ddot{\theta}\cancelto{1}{(\sin^2\theta + \cos^2\theta)}
+           - \dfrac{L}{2}mg\sin\theta - m \dfrac{L}{2}\ddot{x}\cos\theta \\
+     & = & m \dfrac{L^2}{4}\ddot{\theta} - \dfrac{L}{2}mg\sin\theta 
+           - m \dfrac{L}{2} \ddot{x}\cos\theta
+    %               & = & (mg 
+    %                    + m(-l\ddot{\theta}\cos\theta - l\ddot{\theta}\sin\theta)
+    %                   )l\sin\theta 
+    %                   -m(\ddot{x} 
+    %                       - \ddot{\theta}l\sin\theta + \ddot{\theta}l\cos\theta
+    %                   )l\cos\theta \\
+    % & = & mgl\sin\theta - ml^2\ddot{\theta}\cos\theta\sin\theta- ml^2\ddot{\theta}\sin^2\theta \\
+    % &  & - ml\ddot{x}\cos\theta + ml^2\ddot{\theta}\cos\theta\sin\theta 
+    %     - ml^2\ddot{\theta}\cos^2\theta \\
+    % & = & mgl\sin\theta - ml^2\ddot{\theta}(\sin^2\theta + \cos^2\theta) - ml\ddot{x}\cos\theta \\
+    % & = & mgl\sin\theta - ml^2\ddot{\theta} - ml\ddot{x}\cos\theta 
+ \end{eqnarray*}
+
+We are assuming the center of gravity and the center of mass of the rod are at the same point, so
+there is no angular movement of the rod around it's center. Therefore:
+
+\begin{align}
+  I\ddot{\theta} & = 0 \nonumber\\
+  mgl\sin\theta - ml^2\ddot{\theta} - ml\ddot{x}\cos\theta  & = 0 \nonumber\\
+  g\sin\theta - l\ddot{\theta} - \ddot{x}\cos\theta & = 0 \label{eqn:pre_tf}
+\end{align}
+
+
+
+Using linear approximation, we approximate:
+
+\begin{align*}
+  g\sin\theta - l\ddot{\theta} - \ddot{x}\cos\theta & = 0
+  \begin{cases}
+    \sin\theta \approx \theta \\
+    \cos\theta \approx 1
+  \end{cases}
+\end{align*}
+ 
+Taking Laplace transform of equation~\ref{eqn:pre_tf}, we have: 
+
 
 
 \end{document}
