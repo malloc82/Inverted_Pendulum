@@ -103,17 +103,17 @@ Using Newton's second law for the vertical motion of the pendulum gives
  
  Using Equation~\ref{eqn:eq2}, Equation~\ref{eqn:eq1} can be written as 
  \begin{align*}
-   F_y - mg & = m\left(-l/2\cos\theta\left(\frac{d\theta}{dt}\right) - l/2\sin\theta\frac{d^2\theta}{dt^2}\right)
+   F_y - mg & = m(-\frac{L}{2}\dot{\theta}^2\cos\theta - \frac{L}{2}\ddot{\theta}\sin\theta )
  \end{align*}
  
  Thus, the vertical reaction force, $F_y$, can be written as
  \begin{align*}
-   F_y & = mg + m\left(-l/2\cos\theta\left(\frac{d\theta}{dt}\right) - l/2\sin\theta\frac{d^2\theta}{dt^2}\right)
+   F_y & = mg + m\left(-\frac{L}{2}\dot{\theta}^2\cos\theta - \frac{L}{2}\ddot{\theta}\sin\theta\right)
  \end{align*}
  
  For any object, the relationship between the moment applied on an object and its angular acceleration is given by the following relationship
  \begin{align}
-   \sum \overline{M} = I\frac{d^2\theta}{dt^2}\label{eqn:eq3}
+   \sum \overline{M} = I \ddot{\theta}\label{eqn:eq3}
  \end{align}
  
  where $\overline{M}$ is the moment due to a given force and defined as 
