@@ -203,5 +203,23 @@ Using linear approximation, we approximate:
   \dfrac{L}{2}s^2\Theta - g\Theta & = U \\
   \Theta & = \dfrac{\frac{2}{L}}{s^2 - \frac{2g}{L}}U
 \end{align*}
-where $U$ is an input acceleration (replacing $\ddot{x}$)
+where $U$ is an input acceleration (replacing $\ddot{x}$)\\
+
+\noindent We now have the following transfer function:
+
+\[
+  T(s) = \dfrac{\Theta}{U} = \dfrac{\frac{2}{L}}{s^2-\frac{2g}{L}}
+\]
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=4.5 in]{pics/tf.eps}
+  \end{center}
+  \caption{Block diagram for our system}
+  \label{fig:block_diagram}
+\end{figure}
+
+We will use the  techniques we have learned this semester to find appropriate values for $k_P$ and $k_D$ to ensure system stability. We have yet to determine the input signal to be controlled in Figure~\ref{fig:block_diagram}.
+
+
 \end{document}
