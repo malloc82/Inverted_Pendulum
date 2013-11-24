@@ -184,18 +184,18 @@ there is no angular movement of the rod around it's center. Therefore:
   I\ddot{\theta} & = 0 \nonumber\\
   m \dfrac{L^2}{4}\ddot{\theta} - \dfrac{L}{2}mg\sin\theta 
       - m \dfrac{L}{2} \ddot{x}\cos\theta  & = 0 \nonumber\\
-  \dfrac{L}{2}\ddot{\theta} - g\sin\theta - \ddot{x}\cos\theta & = 0 \label{eqn:pre_tf}
+  \dfrac{L}{2}\ddot{\theta} - g\sin\theta - \ddot{x}\cos\theta & = 0 \nonumber
 \end{align}
 
 Using linear approximation, we approximate:
 
-\begin{align*}
-  \dfrac{L}{2}\ddot{\theta} - g\theta - \ddot{x} & = 0 \\
+\begin{align}
+  \dfrac{L}{2}\ddot{\theta} - g\theta - \ddot{x} & = 0 \label{eqn:pre_tf} \\ 
   & \begin{cases}
-    \sin\theta \approx \theta \\
-    \cos\theta \approx 1
+    \sin\theta \approx \theta \nonumber\\
+    \cos\theta \approx 1\nonumber\\
   \end{cases}
-\end{align*}
+\end{align}
  
 \noindent Taking Laplace transform of equation~\ref{eqn:pre_tf}, we have: 
 
