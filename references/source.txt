@@ -4,6 +4,6 @@ lab_Inverted Pendulum_S05.pdf ... http://www.ece.utah.edu/~ece3510/lab_Inverted%
 LMIP.pdf ... http://www.ualberta.ca/~robles/LMIP.pdf
 InvertedPendulumOnCartSolution.pdf ... http://www.stanford.edu/class/me161/documents/InvertedPendulumOnCartSolution.pdf
 Ph3.Chapter.TheInvertedPendulum.pdf ... http://www.ligo.caltech.edu/~vsanni/ph3/TheInvertedPendulum/Ph3.Chapter.TheInvertedPendulum.pdf
-
+Inverted Pendulum.pdf ... http://www.engr.usask.ca/classes/EE/480/Inverted%20Pendulum.pdf
 Video:
 http://www.spumone.org/courses/control-notes/inverted-pendulum/
