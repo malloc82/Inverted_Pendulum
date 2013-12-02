@@ -12,3 +12,6 @@
 *.dvi
 *.toc
 *.blg
+
+# ignore java class files
+*.class
