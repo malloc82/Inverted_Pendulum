@@ -32,17 +32,20 @@ direction to make sure the rod is back to resting position relative to the cart.
 
 
 \subsection{X-axis}
-One the horizontal, x-axis, we have:
+On the horizontal, x-axis, we have:
 
 \begin{align*}
   % F_x & = F_{cart} + F_{rod} \\
   % F_{cart} & = M\ddot{x}  \\
   % F_{rod}  & = m a_x + m a_{p} \\
   %         & = m \ddot{x} + m (a_{t} + a_{c})
-    F_x & = m \ddot{x} + m (a_{t} + a_{c})
+  F_x = 	M\frac{L}{2}\ddot{x}\cos{\theta}
+  		+\frac{mL}{2}\ddot{x}\cos{\theta}
+  		-m\left(\frac{L}{2}\right)^2\ddot{\theta}\cos^2{\theta}
+		-m\left(\frac{L}{2}\right)^2\dot{\theta}^2\sin{\theta}\cos{\theta}
 \end{align*}
 
-where $a_t$ and $a_c$ are tangential and centripetal acceleration respectively. 
+%where $a_t$ and $a_c$ are tangential and centripetal acceleration respectively. 
 
 \begin{figure}[!h]
   \begin{center}
