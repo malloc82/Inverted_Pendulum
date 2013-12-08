@@ -37,3 +37,8 @@ title('Response of Pendulum Position to an Impulse Disturbance under PID Control
 [num den] = tfdata(T,'v');
 
 [z p k] = tf2zp([[num]], [[den]])
+figure(2)
+rlocus(T)
+figure(3)
+bode(T)
+C
