@@ -6,8 +6,19 @@
 
 \begin{document}
 \maketitle 
-\section{First}
-For the past few weeks, we designed a system that consists of an inverted pendulum on two wheels. This design was created by using the programmable BRIC from a LEGO Mindstorms EV3 set. The overall goal of the system was to have the two wheels balance the pendulum in an upright, vertical position after a slight disturbance offsetting the inverted pendulum by a relatively small angle. (This assumed small angle comes into play in our calculations.) Additionally, we wanted the design to have a settling time after the disturbance to correct itself in less than 5 seconds.
-   
-The designing process began with observing and analyzing the physics behind our system. Friction was ignored as we intended our PID controller to cancel out friction's effect. As seen in our modeling document, we were able to derive the governing equations of motion behind our design. As expected, we observed that our inverted pendulum transfer function was unstable as clearly indicated by the pole existing in the positive, right half plane (seen in our pole-zero diagram). This result made a controlling mechanism a necessity in the design to gain more stability. As for the controller used, a simple PID controller was chosen along with negative feedback through the use of a LEGO Mindstorms EV3 gyro sensor.          
+\section{•}
+For the past few weeks, we have been designing a system that consists of an inverted pendulum on two wheels. This design is constructed by using the programmable BRIC from a LEGO Mindstorms EV3 set and additional LEGO pieces to physically construct it (seen in photos from modeling document). The overall goal of the system is to have the two wheels balance the pendulum in an upright, vertical position and to continue doing so after any slight disturbances that may offset the inverted pendulum by a relatively small angle (this assumed small angle comes into play in design calculations). 
+
+\section{•}  
+The designing process began with observing and analyzing the physics behind our system. Friction was ignored as the design intended to use a PID controller to cancel out friction's effect. For ease of calculation, we approximated our pendulum offset angles to be very small where sin($\theta$)= $\theta$, and cos($\theta$)= 1. As seen in the modeling document, we were able to derive the governing equations of motion behind our design. As expected, we observed that our inverted pendulum transfer function was unstable, which is clearly indicated by a pole existing in the positive, right half plane in our pole-zero diagram on the modeling document. This result made a controlling mechanism a necessity in order to gain stability for our system. As for the controller used, a simple PID controller was chosen along with negative feedback through the use of a LEGO Mindstorms EV3 gyro sensor. The unstable transfer function that represents the inverted pendulum system is as follows:
+\[
+  T(s) = \dfrac{\Theta}{U} = \dfrac{M+m}{m}\dfrac{\frac{2}{L}}{s^2-\frac{2g}{L}}
+\]
+This  transfer was then incorporated into the block diagram and then the transfer function that governed the entire system is represented by:
+Insert Transfer Function here.
+
+\section{•}
+We then went on to tune our system's parameters, $K_p$, $K_i$, and $K_d$, to optimize correction to any disturbance. In fact, the overall settling time simulated on MATLAB came out be 1.22 seconds. 
+The first transfer function can be described as having acceleration inputs and an angle theta, for the pendulum position, being the observed output. The design should adhere to the following specifications: settling time should be very responsive, pendulum angle theta never rotating beyond 20 degrees or so, and the steady state error should be small as well. 
+    
 \end{document}
