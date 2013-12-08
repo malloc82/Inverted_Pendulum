@@ -15,38 +15,25 @@ import lejos.robotics.SampleProvider;
 
 public class ev3gyro_test {
     private Port[] port = {SensorPort.S1, SensorPort.S2, SensorPort.S3, SensorPort.S4};
-    private EV3GyroSensor  gyros_angle;  // one gyro sensor can only do one mode.
-    private EV3GyroSensor  gyros_rate;
-    private SampleProvider angle_sampler;
-    private SampleProvider rate_sampler;
+    private Gyro gyro_angle;
+    private Gyro gyro_rate;
     
     public ev3gyro_test(int port_angle, int port_rate) {
-        gyros_angle = new EV3GyroSensor(port[port_angle]);
-        gyros_angle.reset();
-        gyros_rate  = new EV3GyroSensor(port[port_rate]);
-        gyros_rate.reset();
-
-        angle_sampler = gyros_angle.getAngleMode();
-        rate_sampler  = gyros_rate.getRateMode();
+        gyro_angle = new Gyro(port[port_angle], Gyro.MODE.ANGLE_MODE);
+        gyro_rate  = new Gyro(port[port_rate], Gyro.MODE.RATE_MODE);
     }
 
     public void read_test () {
         long curr_time = System.currentTimeMillis();
         long loop_time = 30000; // 5sec, in ms 
         long end_time  = curr_time + loop_time;
-        int angle_sample_size = angle_sampler.sampleSize();
-        int rate_sample_size  = rate_sampler.sampleSize();
-
-        out.println("angle_sample_size="+Integer.toString(angle_sample_size)+
-                    ", rate_sample_size="+Integer.toString(rate_sample_size));
         
         while (curr_time <= end_time) {
             
             // must allocate array in loop, otherwise all the sample data will be accumulated
-            float[] angle_sample = new float[angle_sample_size]; 
-            float[] rate_sample  = new float[rate_sample_size];
-            angle_sampler.fetchSample(angle_sample, 0);
-            rate_sampler.fetchSample(rate_sample, 0);
+
+            float[] angle_sample = gyro_angle.getSamples();
+            float[] rate_sample  = gyro_rate.getSamples();
             out.println(Long.toString(curr_time) + 
                         "    sample : angle=" + Float.toString(angle_sample[0]) + 
                         ", sample : rate=" + Float.toString(rate_sample[0]));
@@ -109,5 +96,6 @@ public class ev3gyro_test {
         // runtest();
         out.println("gyro test end. ");
     }
+
 }
 

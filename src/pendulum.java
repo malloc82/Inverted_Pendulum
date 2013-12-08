@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Arrays;
 
+import java.lang.Float;
 import java.lang.Math;
 
 import lejos.hardware.sensor.EV3GyroSensor;
@@ -19,29 +20,35 @@ import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
 import lejos.utility.Integration;
 
-public class pendulum {
-    private static float desired_angle;
-    private static Integration angle_error_int;
-    private static Derivative  angle_error_dev = 0;
+public class Pendulum {
+    // private static final int ANGLE_MODE = 1;
+    // private static final int RATE_MODE = 0;
 
-    private static HashMap<String, Float> PID_params = new HashMap<String, Float>();
-    private static int[] gyro_ports;
-    private static Port[] port = {SensorPort.S1, SensorPort.S2, SensorPort.S3, SensorPort.S4};
-        
-    private static EV3GyroSensor[]  gyro;
-    private static SampleProvider[] angle_sampler;
-    private static int[] sampleSize = new int[2];
+    private float desired_angle;
 
-    private static RegulatedMotor leftMotor  = Motor.D;
-    private static RegulatedMotor rightMotor = Motor.A;
+    private HashMap<String, Float> PID_params = new HashMap<String, Float>();
+    private Port[] sensor_ports = {SensorPort.S1, SensorPort.S2, SensorPort.S3, SensorPort.S4};
+
+    private int port_angle = -1;
+    private int port_rate  = -1;
+
+    private Gyro gyro_angle;
+    private Gyro gyro_rate;
+    private Integration angle_error_int;
+
+    private RegulatedMotor leftMotor;
+    private RegulatedMotor rightMotor;
 
     public static void main(String[] args) {
+        Pendulum pendulum = new Pendulum(args);
+    }
 
+    public Pendulum (String[] args) {
         desired_angle = 0;
 
-        PID_params.put("Kp", 1.0);
-        PID_params.put("Kd", 1.0);
-        PID_params.put("Ki", 1.0);
+        PID_params.put("Kp", new Float(1.0));
+        PID_params.put("Kd", new Float(1.0));
+        PID_params.put("Ki", new Float(1.0));
         for (int i=0; i < args.length; ++i) {
             out.println(args[i]);
             String[] tokens = args[i].split("=");
@@ -54,90 +61,70 @@ public class pendulum {
                     PID_params.put("Kd", Float.parseFloat(tokens[1]));
                 } else if (tokens[0].equals("Ki")) { 
                     PID_params.put("Ki", Float.parseFloat(tokens[1]));
-                } // else if (tokens[0].equals("gyro")) {
-                //     String[] ports = tokens[1].split(",");
-                //     gyro_ports = new int[ports.length];
-                //     for (int j = 0; j < ports.length; ++j) {
-                //         gyro_ports[j] = Integer.parseInt(ports[j]);
-                //     }
-                // }
+                } else if (tokens[0].equals("angle")) {
+                    port_angle = Integer.parseInt(tokens[1]);
+                } else if (tokens[0].equals("rate")) {
+                    port_rate = Integer.parseInt(tokens[1]);
+                }
             }
         }
+        if (port_angle < 0) {
+            out.println("Do not have gyro angle sensor information ... quit.");
+            return;
+        }
+        if (port_rate < 0) {
+            out.println("Do not have gyro rate sensor information ... quit.");
+            return;
+        }
+
         out.println("PID parameters are: ");
         out.println("    Kp = " + Float.toString(PID_params.get("Kp")));
         out.println("    Kd = " + Float.toString(PID_params.get("Kd")));
         out.println("    Ki = " + Float.toString(PID_params.get("Ki")));
         out.println("");
-        // out.println("Gyro ports are : " + Arrays.toString(gyro_ports));
 
+        // out.println("Gyro ports are : " + Arrays.toString(gyro_ports));
     }
 
-    public static void init() {
+    public void init() {
         out.println("Initializing gyro sensors ... ");
-        gyro_ports = new int[2];
-        gyro_ports[0] = 1;
-        gyro_ports[1] = 2;
-        gyro          = new EV3GyroSensor[gyro_ports.length];
-        angle_sampler = new SampleProvider[gyro_ports.length];
-        for (int i = 0; i < gyro_ports.length; ++i) {
-            gyro[i] = new EV3GyroSensor(port[gyro_ports[i]]);
-            gyro[i].reset(); // reset gyro sensor
-            angle_sample[i] = gyro.getAngleMode();
-        }
-        
+        gyro_angle = new Gyro(sensor_ports[port_angle], Gyro.MODE.ANGLE_MODE);
+        gyro_rate  = new Gyro(sensor_ports[port_rate],  Gyro.MODE.RATE_MODE);        
+        out.println("done.");        
+
+        out.println("Initializing motors ... ");
+        leftMotor = Motor.D;
+        rightMotor = Motor.A;
+        leftMotor.resetTachoCount();
+        rightMotor.resetTachoCount();
+        leftMotor.rotateTo(0);
+        rightMotor.rotateTo(0);
         out.println("done.");        
     }
 
-    public static float PID_controller() {
-        
-        // float angular_acceleration = PID_params.get("Kp")*(
+    public int radian2degree(float radian) {
+        return (int)(radian / 180.0 * 3.1415926 + 0.5);
     }
 
-    public static float getAngle() {
-        sampleSize[0] = angle_sampler[0].sampleSize();
-        sampleSize[1] = angle_sampler[1].sampleSize();
-
-        if (sampleSize[0] > 1) {
-            out.println(String.valueOf(System.currentTimeMillis()) + " : sample size 0 > 1");
-        }
-        if (sampleSize[1] > 1) {
-            out.println(String.valueOf(System.currentTimeMillis()) + " : sample size 1 > 1");
-        }
-
-        float[] sample0 = new float[sampleSize[0]];
-        float[] sample1 = new float[sampleSize[1]];
-
-        angle_sampler[0].fetchSample(sample0, 0);
-        angle_sampler[1].fetchSample(sample1, 0);
-        
-        return (sample0[0] + sample[1]) / 2;
-    }
-
-    public static void PID_controller() {
+    public void PID_controller() {
+        out.println("PID_controller start ...");
         float Kd = PID_params.get("Kd");
         float Kp = PID_params.get("Kp");
         float Ki = PID_params.get("Ki");
 
         float error = 0;
-        float curr_angle = getAngle();
-        
-        leftMotor.resetTachoCount();
-        rightMotor.resetTachoCount();
+        float[] curr_angle = gyro_angle.getSamples();
+        float[] curr_rate = gyro_rate.getSamples();
 
-        leftMotor.rotateTo(0);
-        rightMotor.rotateTo(0);
-
-        error = (desired_angle - curr_angle);
+        error = (desired_angle - curr_angle[0]);
         angle_error_int = new Integration(0, error);
-        angle_error_dev = new Derivative(error);
         
         while (true) {
             
-            acceleration = 
+            int acceleration = radian2degree(
                 Kp*error + 
-                Kd*angle_error_dev.add(reading) + 
-                Ki*angle_error_int.addreading(error);
-            acceleration = acceleration / 180 * 3.1415926; // acceleration has to be in degree
+                Kd*curr_rate[0] + 
+                Ki*(float)angle_error_int.addReading(error));
 
             if ( acceleration > 0 ) {
                 leftMotor.setAcceleration(acceleration);
@@ -152,36 +139,9 @@ public class pendulum {
             } else {
                 // not sure 
             }
-            curr_angle = getAngle();
-        }
-    }
-
-    public class Derivative {
-        private long[]   readingTimeMillis = new long[2];
-        private double[] readingValue = new double[2];
-        private double   gradient = 0;
-        
-        public Derivative(double initial_reading) {
-            
-            readingTimeMillis[0] = System.currentTimeMillis();
-            readingTimeMillis[1] = readingTimeMillis[0];
-
-            readingValue[0] = initial_reading;
-            readingValue[1] = readingValue[0];
-            
-            gradient = 0;
-        }
-
-        public double addreading(double reading) {
-            double curr_time = System.currentTimeMillis();
-            readingTimeMillis[1] = readingTimeMillis[0];
-            readingValue[1] = readingValue[0];
-            
-            readingTimeMillis[0] = curr_time;
-            readingValue[0] = reading;
-            
-            gradient = (readingValue[0] - readingValue[1]) / (readingTimeMillis[0] - readingTimeMillis[1]);
-            return gradient;
+            curr_angle = gyro_angle.getSamples();
+            curr_rate  = gyro_rate.getSamples();
+            error = (desired_angle - curr_angle[0]);
         }
     }
 }
