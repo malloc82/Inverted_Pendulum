@@ -213,13 +213,23 @@ where $U$ is an input acceleration (replacing $\ddot{x}$)\\
 
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[width=4.5 in]{pics/tf.eps}
+    \includegraphics[width=5 in]{pics/Block_Diagram.eps}
   \end{center}
   \caption{Block diagram for our system}
   \label{fig:block_diagram}
 \end{figure}
 
-We will use the  techniques we have learned this semester to find appropriate values for $k_P$ and $k_D$ to ensure system stability. We have yet to determine the input signal to be controlled in Figure~\ref{fig:block_diagram}.
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=4 in]{pics/Block_Diagram_3.eps}
+  \end{center}
+  \caption{Another way to understand  our system}
+  \label{fig:block_diagram_3}
+\end{figure}
+
+We used Matlab to tune $K_p$, $K_D$, and $K_i$, giving them values of $K_D=20$, $K_p=300$, and $K_i=1$.
+%We will use the  techniques we have learned this semester to find appropriate values for $k_P$ and $k_D$ to ensure system stability. We have yet to determine the input signal to be controlled in Figure~\ref{fig:block_diagram}.
+We can redraw this block diagram in the way shown on the next page. This is a different but equally valid  way of conceptualizing our system. In this system, the desired $\theta$ has been removed since it is equal to 0. The input to our system is now the disturbance acceleration, while  the PID controller is in the feedback loop. The gyroscope has been removed for additional simplification.
 
 \newpage
 \section{Performance Measurements}
