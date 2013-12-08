@@ -213,7 +213,7 @@ where $U$ is an input acceleration (replacing $\ddot{x}$)\\
 
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[width=5 in]{pics/Block_Diagram.eps}
+    \includegraphics[width=5 in]{pics/Block_Diagram_2.eps}
   \end{center}
   \caption{Block diagram for our system}
   \label{fig:block_diagram}
@@ -227,13 +227,31 @@ where $U$ is an input acceleration (replacing $\ddot{x}$)\\
   \label{fig:block_diagram_3}
 \end{figure}
 
-We used Matlab to tune $K_p$, $K_D$, and $K_i$, giving them values of $K_D=20$, $K_p=300$, and $K_i=1$.
-%We will use the  techniques we have learned this semester to find appropriate values for $k_P$ and $k_D$ to ensure system stability. We have yet to determine the input signal to be controlled in Figure~\ref{fig:block_diagram}.
-We can redraw this block diagram in the way shown on the next page. This is a different but equally valid  way of conceptualizing our system. In this system, the desired $\theta$ has been removed since it is equal to 0. The input to our system is now the disturbance acceleration, while  the PID controller is in the feedback loop. The gyroscope has been removed for additional simplification.
+We used Matlab to tune $K_p$, $K_D$, and $K_i$, giving them values of $K_D=20$, $K_p=300$, and $K_i=1$. We are estimating the friction coefficient to be about 0.8. This is tentative, however.
+
+We can redraw this block diagram in the way shown on the next page. This is a different but equally valid  way of conceptualizing our system. In this system, the desired $\theta$ has been removed since it is equal to 0. The input to our system is now the disturbance acceleration, while  the PID controller is in the feedback loop. The gyroscope has been removed for additional simplification. 
 
 \newpage
 \section{Performance Measurements}
-The settling time was found to be 1.22 seconds. 
+The full system was simulated in Matlab. The settling time was found to be 1.22 seconds and the bode plot met the performance specifications.
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=5 in]{pics/performance_measurements/impulse_response_perf.eps}
+  \end{center}
+  \caption{Impulse response of our system}
+  \label{fig:impulse_response}
+\end{figure}
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=5 in]{pics/performance_measurements/bode_plot.eps}
+  \end{center}
+  \caption{The Bode plot of our system.}
+  \label{fig:bode_plot}
+\end{figure}
+
+
 
 
 
