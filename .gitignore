@@ -15,3 +15,9 @@
 
 # ignore java class files
 *.class
+
+# ignore ev3 source
+lego/*
+
+# ignore .autosave files
+*.autosave
