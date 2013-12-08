@@ -13,71 +13,39 @@ $\text{Lego Mindstorm EV3}^{\textregistered}$.
 
 \section{Physical Model}
 
-Our goal is to balance a two wheeled inverted pendulum. The pendulum setup is shown in 
-figure~\ref{fig:lego_build}.
+The rod on top of the cart can only lean forward and backward. 
+Base cart also can move only move back and forth. 
+When the rod is out of balance and leaning toward one side, the cart will accelerate toward the same
+direction to make sure the rod is back to resting position relative to the cart.
 
-\begin{figure}[t]
-  \begin{minipage}[b]{2.5in}
-    \centerline{\mbox{\includegraphics[width=2.5in]{pics/Lego/Build_front.eps}}}
-    \centerline{\emph{(a) front view}}
-  \end{minipage}
-  \begin{minipage}[b]{2.5in}
-    \centerline{\mbox{\includegraphics[width=2.5in]{pics/Lego/Build_side.eps}}}
-    \centerline{\emph{(b) side view}}
-  \end{minipage}
-  \caption{Lego two wheeled inverted pendulum setup}
-  \label{fig:lego_build}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=3.5in]{pics/full_system.eps}
+  \end{center}
+  \caption{System setup for inverted pendulum}
+  \label{fig:full_system}
 \end{figure}
-
-On the top of the pendulum, there are two gyro sensors, one on each side. the actual angle of the
-pendulum body will be measured by averaging the two readings from gyro sensors. The bottom of the
-pendulum is controlled by two motors. Motors can be controlled in terms of number of rotations,
-angular volecity and angular acceleration.
-
-% The rod on top of the cart can only lean forward and backward. 
-% Base cart also can move only move back and forth. 
-% When the rod is out of balance and leaning toward one side, the cart will accelerate toward the same
-% direction to make sure the rod is back to resting position relative to the cart.
-
-% \begin{figure}[!h]
-%   \begin{center}
-%     \includegraphics[width=3.5in]{pics/full_system.eps}
-%   \end{center}
-%   \caption{System setup for inverted pendulum}
-%   \label{fig:full_system}
-% \end{figure}
 
 
 \section{Mathematical Model}
 
-For simplicity, the body of two wheeled inverted pendulum is modeld as a straight rod with evenly
-distributed mass. So the center the mass should be in the middle of the rod. We analyze the system
-from two perspective, one from x-axis and one form y-axis. Then combining them together. Symbols we
-used in the derivation is defined as follows: 
-\begin{description}
-  \item[$M$]{Mass of the two wheels.}
-  \item[$m$]{Mass of the pendulum body.}
-  \item[$L$]{Length of our pendulum.}
-  \item[$x$]{Position of the system on x-axis}
-  \item[$y$]{Position of the system on y-axis}
-  \item[$a_t$]{Tangential acceleration.}
-  \item[$a_c$]{Centripetal acceleration.}
-  \item[$\theta$]{Angle of the pendulum.}
-  \item[$\omega$]{Angluar volecity of the wheels}
-\end{description}
+
 
 \subsection{X-axis}
-One the horizontal, x-axis, we have:
+On the horizontal, x-axis, we have:
 
 \begin{align*}
   % F_x & = F_{cart} + F_{rod} \\
   % F_{cart} & = M\ddot{x}  \\
   % F_{rod}  & = m a_x + m a_{p} \\
   %         & = m \ddot{x} + m (a_{t} + a_{c})
-    F_x & = m \ddot{x} + m (a_{t} + a_{c})
+  F_x = 	M\frac{L}{2}\ddot{x}\cos{\theta}
+  		+\frac{mL}{2}\ddot{x}\cos{\theta}
+  		-m\left(\frac{L}{2}\right)^2\ddot{\theta}\cos^2{\theta}
+		-m\left(\frac{L}{2}\right)^2\dot{\theta}^2\sin{\theta}\cos{\theta}
 \end{align*}
 
-where $a_t$ and $a_c$ are tangential and centripetal acceleration respectively. 
+%where $a_t$ and $a_c$ are tangential and centripetal acceleration respectively. 
 
 \begin{figure}[!h]
   \begin{center}
@@ -93,30 +61,30 @@ where $a_t$ and $a_c$ are tangential and centripetal acceleration respectively.
   \label{fig:angular_rod}
 \end{figure}
 
-According to figure~\ref{fig:angular_rod}, angular accelerations for the rod on x-axis can be
-expressed as:
-\begin{align*}
-  a_t & = -\dfrac{L}{2} \ddot{\theta} \\
-  a_c & = -\dfrac{L}{2} \dot{\theta}^2
-\end{align*}
+%According to figure~\ref{fig:angular_rod}, angular accelerations for the rod on x-axis can be
+%expressed as:
+%\begin{align*}
+%  a_t & = -\dfrac{L}{2} \ddot{\theta} \\
+%  a_c & = -\dfrac{L}{2} \dot{\theta}^2
+%\end{align*}
 
-Since we are only interested in the components on the x-axis, we have:
-
-\begin{align*}
-  a_t & = -\dfrac{L}{2} \ddot{\theta} \cos \theta \\
-  a_c & = -\dfrac{L}{2} \dot{\theta}^2 \sin \theta
-\end{align*}
-
-So 
-
-\begin{align}
-  F_x  & = m \ddot{x} + m (a_{t} + a_{c}) \nonumber\\
-         & = m \ddot{x} -m\dfrac{L}{2} \ddot{\theta} \cos \theta 
-                        -m\dfrac{L}{2} \dot{\theta}^2 \sin \theta \label{eqn:f_x}
-      % & = (M + m) \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
-      %               - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta \label{eqn:f_x}
-\end{align}
-\FloatBarrier
+%Since we are only interested in the components on the x-axis, we have:
+%
+%\begin{align*}
+%  a_t & = -\dfrac{L}{2} \ddot{\theta} \cos \theta \\
+%  a_c & = -\dfrac{L}{2} \dot{\theta}^2 \sin \theta
+%\end{align*}
+%
+%So 
+%
+%\begin{align}
+%  F_x  & = m \ddot{x} + m (a_{t} + a_{c}) \nonumber\\
+%         & = m \ddot{x} -m\dfrac{L}{2} \ddot{\theta} \cos \theta 
+%                        -m\dfrac{L}{2} \dot{\theta}^2 \sin \theta \label{eqn:f_x}
+%      % & = (M + m) \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
+%      %               - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta \label{eqn:f_x}
+%\end{align}
+%\FloatBarrier
 
 
 \subsection{Y-axis}
