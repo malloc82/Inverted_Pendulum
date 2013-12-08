@@ -15,13 +15,16 @@ Ki = 1;
 Kd = 1;
 C = pid(Kp,Ki,Kd);      % The PID controller
 
-T = feedback(Pend,C); % The closed loop transfer function for the entire system
+T = feedback(Pend,C); % The closed loop transfer function 
+                      % for the entire system
 
 %% Simulate the Impulse Response
 
 t= 0:0.01:10;
 impulse(T,t)
-title('Response of Pendulum Position to an Impulse Disturbance under PID Control: Kp = 1, Ki = 1, Kd = 1')
+title({'Response of Pendulum Position to an Impulse',
+       'Disturbance under PID Control:',
+       'Kp = 1, Ki = 1, Kd = 1'})
 
 %% Try with Kp = 300 and Kd = 20
 Kp = 300;
@@ -30,7 +33,9 @@ C = pid(Kp,Ki,Kd);
 
 T = feedback(Pend,C)
 impulse(T,t)
-title('Response of Pendulum Position to an Impulse Disturbance under PID Control: Kp = 300, Ki = 1, Kd = 20')
+title({'Response of Pendulum Position to an Impulse',
+       'Disturbance under PID Control:',
+       'Kp = 300, Ki = 1, Kd = 20'})
 
 %% Find poles and zeros of system
 
