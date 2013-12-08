@@ -18806,7 +18806,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-12-08 07:03:33 +0000</string>
+	<string>2013-12-08 07:20:44 +0000</string>
 	<key>Modifier</key>
 	<string>Matthew Mosley</string>
 	<key>NotesVisible</key>
@@ -23530,8 +23530,6 @@
 			</array>
 			<key>GridInfo</key>
 			<dict>
-				<key>ShowsGrid</key>
-				<string>YES</string>
 				<key>SnapsToGrid</key>
 				<string>YES</string>
 			</dict>
@@ -23594,7 +23592,7 @@
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>2</integer>
+		<integer>6</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
@@ -23612,9 +23610,9 @@
 		<key>SidebarWidth</key>
 		<integer>230</integer>
 		<key>VisibleRegion</key>
-		<string>{{95.104898593321991, 82.517485544205854}, {356.99302008743291, 216.78322473477806}}</string>
+		<string>{{-65, 0}, {887.82610536297716, 552.17392449117585}}</string>
 		<key>Zoom</key>
-		<real>2.8599998950958252</real>
+		<real>1.1499999761581421</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
@@ -23639,8 +23637,8 @@
 			</array>
 			<array>
 				<string>Forces on the rod 2</string>
-				<real>1</real>
-				<real>1</real>
+				<real>1.1499999761581421</real>
+				<real>1.1200000047683716</real>
 			</array>
 			<array>
 				<string>Block Diagram 2</string>
