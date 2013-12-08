@@ -39,13 +39,10 @@ On the horizontal, x-axis, we have:
   % F_{cart} & = M\ddot{x}  \\
   % F_{rod}  & = m a_x + m a_{p} \\
   %         & = m \ddot{x} + m (a_{t} + a_{c})
-  F_x = 	M\frac{L}{2}\ddot{x}\cos{\theta}
-  		+\frac{mL}{2}\ddot{x}\cos{\theta}
-  		-m\left(\frac{L}{2}\right)^2\ddot{\theta}\cos^2{\theta}
-		-m\left(\frac{L}{2}\right)^2\dot{\theta}^2\sin{\theta}\cos{\theta}
+  F_x & = (M+m) \ddot{x} + m (a_{t} + a_{c})
 \end{align*}
 
-%where $a_t$ and $a_c$ are tangential and centripetal acceleration respectively. 
+where $a_t$ and $a_c$ are tangential and centripetal acceleration respectively. 
 
 \begin{figure}[!h]
   \begin{center}
@@ -61,30 +58,30 @@ On the horizontal, x-axis, we have:
   \label{fig:angular_rod}
 \end{figure}
 
-%According to figure~\ref{fig:angular_rod}, angular accelerations for the rod on x-axis can be
-%expressed as:
-%\begin{align*}
-%  a_t & = -\dfrac{L}{2} \ddot{\theta} \\
-%  a_c & = -\dfrac{L}{2} \dot{\theta}^2
-%\end{align*}
+According to figure~\ref{fig:angular_rod}, angular accelerations for the rod on x-axis can be
+expressed as:
+\begin{align*}
+  a_t & = -\dfrac{L}{2} \ddot{\theta} \\
+  a_c & = -\dfrac{L}{2} \dot{\theta}^2
+\end{align*}
 
-%Since we are only interested in the components on the x-axis, we have:
-%
-%\begin{align*}
-%  a_t & = -\dfrac{L}{2} \ddot{\theta} \cos \theta \\
-%  a_c & = -\dfrac{L}{2} \dot{\theta}^2 \sin \theta
-%\end{align*}
-%
-%So 
-%
-%\begin{align}
-%  F_x  & = m \ddot{x} + m (a_{t} + a_{c}) \nonumber\\
-%         & = m \ddot{x} -m\dfrac{L}{2} \ddot{\theta} \cos \theta 
-%                        -m\dfrac{L}{2} \dot{\theta}^2 \sin \theta \label{eqn:f_x}
-%      % & = (M + m) \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
-%      %               - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta \label{eqn:f_x}
-%\end{align}
-%\FloatBarrier
+Since we are only interested in the components on the x-axis, we have:
+
+\begin{align*}
+  a_t & = -\dfrac{L}{2} \ddot{\theta} \cos \theta \\
+  a_c & = -\dfrac{L}{2} \dot{\theta}^2 \sin \theta
+\end{align*}
+
+So 
+
+\begin{align}
+  F_x & = (M+m) \ddot{x} + m (a_{t} + a_{c})\nonumber\\
+         & = (M+m) \ddot{x} -m\dfrac{L}{2} \ddot{\theta} \cos \theta 
+                        -m\dfrac{L}{2} \dot{\theta}^2 \sin \theta 
+%	      & = (M + m) \ddot{x} - m\dfrac{L}{2} \ddot{\theta} \cos \theta 
+%	                     - m \dfrac{L}{2} \dot{\theta}^2 \sin \theta
+\end{align}
+\FloatBarrier
 
 
 \subsection{Y-axis}
@@ -157,16 +154,16 @@ So
    I\ddot{\theta} & = & F_y\dfrac{L}{2}\sin\theta - F_x\dfrac{L}{2}\cos\theta \\
      & = & \left( m\dfrac{L}{2}\ddot{\theta}\sin\theta - m\dfrac{L}{2}\dot{\theta}^2\cos\theta 
             - mg\right) \dfrac{L}{2}\sin\theta \\
-     &   & -\left( m\ddot{x} - m\dfrac{L}{2}\ddot{\theta}\cos\theta - 
+     &   & -\left( (M+m)\ddot{x} - m\dfrac{L}{2}\ddot{\theta}\cos\theta - 
              m\dfrac{L}{2}\dot{\theta}^2\sin\theta \right) \dfrac{L}{2}\cos\theta\\
      & = & m\dfrac{L^2}{4}\ddot{\theta}\sin^2\theta 
            - \cancel{m\dfrac{L^2}{4}\dot{\theta}^2\cos\theta\sin\theta} - \dfrac{L}{2}mg\sin\theta\\
-     &   & - m \dfrac{L}{2} \ddot{x}\cos\theta + m\dfrac{L^2}{4}\ddot{\theta}\cos^2\theta + 
+     &   & - (M+m) \dfrac{L}{2} \ddot{x}\cos\theta + m\dfrac{L^2}{4}\ddot{\theta}\cos^2\theta + 
              \cancel{m\dfrac{L^2}{4}\dot{\theta}^2\sin\theta\cos\theta} \\
      & = & m\dfrac{L^2}{4}\ddot{\theta}\cancelto{1}{(\sin^2\theta + \cos^2\theta)}
-           - \dfrac{L}{2}mg\sin\theta - m \dfrac{L}{2}\ddot{x}\cos\theta \\
+           - \dfrac{L}{2}mg\sin\theta - (M+m) \dfrac{L}{2}\ddot{x}\cos\theta \\
      & = & m \dfrac{L^2}{4}\ddot{\theta} - \dfrac{L}{2}mg\sin\theta 
-           - m \dfrac{L}{2} \ddot{x}\cos\theta
+           - (M+m) \dfrac{L}{2} \ddot{x}\cos\theta
     %               & = & (mg 
     %                    + m(-l\ddot{\theta}\cos\theta - l\ddot{\theta}\sin\theta)
     %                   )l\sin\theta 
@@ -186,14 +183,14 @@ there is no angular movement of the rod around it's center. Therefore:
 \begin{align}
   I\ddot{\theta} & = 0 \nonumber\\
   m \dfrac{L^2}{4}\ddot{\theta} - \dfrac{L}{2}mg\sin\theta 
-      - m \dfrac{L}{2} \ddot{x}\cos\theta  & = 0 \nonumber\\
-  \dfrac{L}{2}\ddot{\theta} - g\sin\theta - \ddot{x}\cos\theta & = 0 \nonumber
+      - (M+m) \dfrac{L}{2} \ddot{x}\cos\theta  & = 0 \nonumber\\
+  m\dfrac{L}{2}\ddot{\theta} - mg\sin\theta - (M+m)\ddot{x}\cos\theta & = 0 \nonumber
 \end{align}
 
 Using linear approximation, we approximate:
 
 \begin{align}
-  \dfrac{L}{2}\ddot{\theta} - g\theta - \ddot{x} & = 0 \label{eqn:pre_tf} \\ 
+  m\dfrac{L}{2}\ddot{\theta} - mg\theta - (M+m)\ddot{x} & = 0 \label{eqn:pre_tf} \\ 
   & \begin{cases}
     \sin\theta \approx \theta \nonumber\\
     \cos\theta \approx 1\nonumber\\
@@ -203,15 +200,15 @@ Using linear approximation, we approximate:
 \noindent Taking Laplace transform of equation~\ref{eqn:pre_tf}, we have: 
 
 \begin{align*}
-  \dfrac{L}{2}s^2\Theta - g\Theta & = U \\
-  \Theta & = \dfrac{\frac{2}{L}}{s^2 - \frac{2g}{L}}U
+  m\dfrac{L}{2}s^2\Theta - mg\Theta & = (M+m)U \\
+  \Theta & = \dfrac{M+m}{m}\dfrac{\frac{2}{L}}{s^2 - \frac{2g}{L}}U
 \end{align*}
 where $U$ is an input acceleration (replacing $\ddot{x}$)\\
 
 \noindent We now have the following transfer function:
 
 \[
-  T(s) = \dfrac{\Theta}{U} = \dfrac{\frac{2}{L}}{s^2-\frac{2g}{L}}
+  T(s) = \dfrac{\Theta}{U} = \dfrac{M+m}{m}\dfrac{\frac{2}{L}}{s^2-\frac{2g}{L}}
 \]
 
 \begin{figure}[!h]
