@@ -41,7 +41,27 @@ public class Pendulum {
 
     public static void main(String[] args) {
         Pendulum pendulum = new Pendulum(args);
+
+        out.println("****************************************************");
+        out.println("*                                                  *");
+        out.println("*    Initializing sensors and motors...            *");
+        out.println("*                                                  *");
+        out.println("****************************************************");
+        Delay.msDelay(1000);
         pendulum.init();
+
+        out.println("****************************************************");
+        out.println("*                                                  *");
+        out.println("*    PID_controller start in ...                   *");
+        out.println("*                                                  *");
+        out.println("****************************************************");
+        out.println("3");
+        Delay.msDelay(1000);
+        out.println("2");
+        Delay.msDelay(1000);
+        out.println("1");
+        Delay.msDelay(1000);
+        out.println("Now");
         pendulum.PID_controller();
     }
 
@@ -110,27 +130,27 @@ public class Pendulum {
     }
 
     public void PID_controller() {
-        out.println("PID_controller start ...");
+
         float Kd = PID_params.get("Kd");
         float Kp = PID_params.get("Kp");
         float Ki = PID_params.get("Ki");
 
         float error = 0;
-        float[] curr_angle = gyro_angle.getSamples();
-        float[] curr_rate = gyro_rate.getSamples();
+        float curr_angle = (gyro_angle.getSamples())[0];
+        float curr_rate  = -(gyro_rate.getSamples())[0];
 
-        error = (desired_angle - (-curr_angle[0]));
+        error = (desired_angle - curr_angle);
         angle_error_int = new Integration(0, error);
         
         while (true) {
-            int acceleration = radian2degree(
-                Kp*error + 
-                Kd*(curr_rate[0]) + 
-                Ki*(float)angle_error_int.addReading(error));
+            float integral = (float)angle_error_int.addReading(error);
+            int acceleration = radian2degree(Kp*error + Kd*(curr_rate) + Ki*integral);
 
-            out.println("angle = " + String.valueOf(-curr_angle[0]) + 
-                        ", rate = " + String.valueOf(curr_rate[0]) + 
-                        ", acceleration = " + String.valueOf(acceleration));
+            out.println(String.valueOf(System.currentTimeMillis()) + 
+                        ":   angle = " + String.valueOf(curr_angle) + 
+                        ", rate = " + String.valueOf(curr_rate) + 
+                        ", acceleration = " + String.valueOf(acceleration) + 
+                        ", integral_error = " + String.valueOf(integral));
 
             if ( acceleration > 0 ) {
                 leftMotor.setAcceleration(acceleration);
@@ -145,9 +165,9 @@ public class Pendulum {
             } else {
                 // not sure 
             }
-            curr_angle = gyro_angle.getSamples();
-            curr_rate  = gyro_rate.getSamples();
-            error = (desired_angle - (-curr_angle[0]));
+            curr_angle =  (gyro_angle.getSamples())[0];
+            curr_rate  = -(gyro_rate.getSamples())[0];
+            error = (desired_angle - curr_angle);
         }
     }
 }
