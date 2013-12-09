@@ -41,6 +41,8 @@ public class Pendulum {
 
     public static void main(String[] args) {
         Pendulum pendulum = new Pendulum(args);
+        pendulum.init();
+        pendulum.PID_controller();
     }
 
     public Pendulum (String[] args) {
@@ -83,7 +85,8 @@ public class Pendulum {
         out.println("    Ki = " + Float.toString(PID_params.get("Ki")));
         out.println("");
 
-        // out.println("Gyro ports are : " + Arrays.toString(gyro_ports));
+        out.println("Gyro angle port = " + String.valueOf(port_angle));
+        out.println("Gyro rate port  = " + String.valueOf(port_rate));
     }
 
     public void init() {
@@ -116,15 +119,18 @@ public class Pendulum {
         float[] curr_angle = gyro_angle.getSamples();
         float[] curr_rate = gyro_rate.getSamples();
 
-        error = (desired_angle - curr_angle[0]);
+        error = (desired_angle - (-curr_angle[0]));
         angle_error_int = new Integration(0, error);
         
         while (true) {
-            
             int acceleration = radian2degree(
                 Kp*error + 
-                Kd*curr_rate[0] + 
+                Kd*(curr_rate[0]) + 
                 Ki*(float)angle_error_int.addReading(error));
+
+            out.println("angle = " + String.valueOf(-curr_angle[0]) + 
+                        ", rate = " + String.valueOf(curr_rate[0]) + 
+                        ", acceleration = " + String.valueOf(acceleration));
 
             if ( acceleration > 0 ) {
                 leftMotor.setAcceleration(acceleration);
@@ -133,7 +139,7 @@ public class Pendulum {
                 rightMotor.forward();
             } else if ( acceleration < 0 ) {
                 leftMotor.setAcceleration(-acceleration);
-            rightMotor.setAcceleration(-acceleration);
+                rightMotor.setAcceleration(-acceleration);
                 leftMotor.backward();
                 rightMotor.backward();
             } else {
@@ -141,7 +147,7 @@ public class Pendulum {
             }
             curr_angle = gyro_angle.getSamples();
             curr_rate  = gyro_rate.getSamples();
-            error = (desired_angle - curr_angle[0]);
+            error = (desired_angle - (-curr_angle[0]));
         }
     }
 }
