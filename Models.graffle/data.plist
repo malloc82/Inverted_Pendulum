@@ -11383,7 +11383,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-12-08 23:33:06 +0000</string>
+	<string>2013-12-09 02:51:28 +0000</string>
 	<key>Modifier</key>
 	<string>Matthew Mosley</string>
 	<key>NotesVisible</key>
@@ -13707,7 +13707,7 @@
 					<key>Points</key>
 					<array>
 						<string>{413.74642769454601, 232.72688743984338}</string>
-						<string>{155.70869093667716, 151.88395848336367}</string>
+						<string>{156.88825453549993, 151.90602152166528}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -19962,7 +19962,7 @@
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{167.99263357919469, 139.60001005499387}</string>
+						<string>{169.17219717801746, 139.62207309329548}</string>
 						<string>{189.13821212825405, 139.60000016166379}</string>
 					</array>
 					<key>Style</key>
@@ -20007,8 +20007,8 @@
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{101.13235281356272, 139.60001005499387}</string>
-						<string>{143.42474829415963, 139.60001005499387}</string>
+						<string>{101.1323528135627, 139.61116972825781}</string>
+						<string>{144.60431189298239, 139.62207309329548}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -21661,7 +21661,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{143.42475443612784, 127.31606776859519}, {24.567873001098633, 24.567884572797357}}</string>
+					<string>{{144.60431803495061, 127.33813080689681}, {24.567873001098633, 24.567884572797357}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -47505,7 +47505,7 @@
 		<key>SidebarWidth</key>
 		<integer>178</integer>
 		<key>Zoom</key>
-		<real>1.75</real>
+		<real>1.3899999856948853</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
@@ -47535,8 +47535,8 @@
 			</array>
 			<array>
 				<string>Block Diagram 2</string>
-				<real>1.75</real>
-				<real>1.7100000381469727</real>
+				<real>1.3899999856948853</real>
+				<real>1.3400000333786011</real>
 			</array>
 			<array>
 				<string>Block Diagram Alternate</string>

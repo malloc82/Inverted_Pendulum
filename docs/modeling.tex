@@ -233,11 +233,11 @@ We can redraw this block diagram in the way shown on the next page. This is a di
 
 \newpage
 \section{Performance Measurements}
-The full system was simulated in Matlab. The settling time was found to be 1.22 seconds and the bode plot met the performance specifications.
+The system was simulated in Matlab. The impulse response and bode plot are shown next. The design criteria require that the settling time be less than 5 seconds and that the pendulum should not move more than 0.05 radians away from the vertical axis. As seen in the impulse response, both design criteria have been met. The settling time was found to be 1.22 seconds.
 
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[width=5 in]{pics/performance_measurements/impulse_response_perf.eps}
+    \includegraphics[width=4.5 in]{pics/performance_measurements/impulse_response_perf.eps}
   \end{center}
   \caption{Impulse response of our system}
   \label{fig:impulse_response}
@@ -245,21 +245,14 @@ The full system was simulated in Matlab. The settling time was found to be 1.22 
 
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[width=5 in]{pics/performance_measurements/bode_plot.eps}
+    \includegraphics[width=4.5 in]{pics/performance_measurements/bode_plot.eps}
   \end{center}
   \caption{The Bode plot of our system.}
   \label{fig:bode_plot}
 \end{figure}
-
+\newpage
 Here is the Matlab code:
 \MatLab{Matlab code for tuning}{lst:tuning}{../Matlab/PID_Design.m}
-%\newcommand{\MatLab}[3]{
-%  \lstset{language=Matlab}
-%  \lstset{backgroundcolor=\color{listinggray},rulecolor=\color{blue}}
-%  \lstset{linewidth=\textwidth}
-%  \lstset{commentstyle=\textit, stringstyle=\upshape,showspaces=false}
-%  \lstset{frame=tb}
-%  \lstinputlisting[caption={Matlab code for tuning},label={matlab_code}]{~/Documents/Inverted_Pendulum/Matlab/PID_Design}
 
 
 
