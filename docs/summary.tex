@@ -19,6 +19,15 @@ The designing process began with observing and analyzing the physics behind our 
 \]
 This  transfer was then incorporated into the block diagram and then the transfer function that governed the entire system is represented by:
 
+Then the overall block diagram with negative feedback from gyro sensor looks like:
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=5 in]{pics/Block_Diagram_2.eps}
+  \end{center}
+  \caption{Block diagram for our system}
+  \label{fig:block_diagram}
+\end{figure}
+
 \section{Design Specifications}
 We then went on to tune our system's parameters, $K_p$, $K_i$, and $K_d$, to optimize correction to any disturbance. In fact, the overall settling time simulated on MATLAB came out be 1.22 seconds. 
 The first transfer function can be described as having acceleration inputs and an angle theta, for the pendulum position, being the observed output. The design should adhere to the following specifications: settling time should be very responsive, pendulum angle theta never rotating beyond 20 degrees or so, and the steady state error should be small as well.  
