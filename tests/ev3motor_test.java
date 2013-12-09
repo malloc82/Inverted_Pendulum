@@ -18,14 +18,27 @@ public class ev3motor_test {
         // Motor_r.setAcceleration(800);
         // out.println("start rotating ...");
         Motor_r.setAcceleration(20);
+        long curr_time = System.currentTimeMillis();
+        long loop_time = 10000;
+        long end_time  = curr_time + loop_time;
         Motor_r.forward();
+        // while (System.currentTimeMillis() <= end_time) {
+        //     out.println("motor speed = " + String.valueOf(Motor_r.getSpeed()));
+        // }
         Delay.msDelay(10000);
-
+        
         out.println("backward rotation");
 
         Motor_r.setAcceleration(20);
         Motor_r.backward();
         Delay.msDelay(50000);
+
+        // curr_time = System.currentTimeMillis();
+        // loop_time = 50000;
+        // end_time  = curr_time + loop_time;
+        // while (System.currentTimeMillis() <= end_time) {
+        //     out.println("motor speed = " + String.valueOf(Motor_r.getSpeed()));
+        // }
         
         // Motor_r.rotateTo(-3600);
         // int speed = Motor_r.getSpeed();
