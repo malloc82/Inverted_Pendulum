@@ -45,3 +45,12 @@
   \lstset{frame=tb}
   \lstinputlisting[caption={#1},label={#2}]{#3}
 }
+
+\newcommand{\Java}[3]{
+  \lstset{language=Java}
+  % \lstset{backgroundcolor=\color{listinggray},rulecolor=\color{blue}}
+  \lstset{linewidth=\textwidth}
+  \lstset{commentstyle=\textit, stringstyle=\upshape,showspaces=false}
+  \lstset{frame=tb}
+  \lstinputlisting[caption={#1},label={#2}]{#3}
+}
