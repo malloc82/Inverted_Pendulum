@@ -123,8 +123,36 @@ public class Pendulum {
 
     public void init() {
         out.println("Initializing gyro sensors ... ");
+        boolean angle_condition = false;
         gyro_angle = new Gyro(sensor_ports[port_angle], Gyro.MODE.ANGLE_MODE);
         gyro_rate  = new Gyro(sensor_ports[port_rate],  Gyro.MODE.RATE_MODE);        
+        while (!angle_condition) {
+            long curr_time = System.currentTimeMillis();
+            long interval = 1000; // 1 second
+            float current_angle = (gyro_angle.getSamples())[0];
+            Delay.msDelay(1000);
+            // while (System.currentTimeMillis() <= curr_time + interval);
+            if ((gyro_angle.getSamples())[0] - current_angle != 0)  {
+                out.println("*****************************************");
+                out.println("*   Angle sampling faulty.              *");
+                out.println("*   Reinitializing angle gyro sensor.   *");
+                out.println("*****************************************");
+                out.println("3");
+                Delay.msDelay(1000);
+                out.println("2");
+                Delay.msDelay(1000);
+                out.println("1");
+                Delay.msDelay(1000);
+                // reseting gyro sensors
+                gyro_angle.reset();
+                gyro_rate.reset();
+            } else {
+                out.println("*****************************************");
+                out.println("*       Angle sampling is ok.           *");
+                out.println("*****************************************");
+                angle_condition = true;
+            }
+        }
         out.println("done.");        
 
         out.println("Initializing motors ... ");
@@ -134,7 +162,8 @@ public class Pendulum {
         rightMotor.resetTachoCount();
         leftMotor.rotateTo(0);
         rightMotor.rotateTo(0);
-        out.println("done.");        
+        out.println("done.");
+        
     }
 
     public int radian2degree(float radian) {

@@ -9,7 +9,8 @@ public class Gyro {
     private Port port;
     private EV3GyroSensor sensor;
     private SampleProvider sampler;
-    private String mode;
+    private String mode_str;
+    private MODE mode;
     private int sample_size;
         
     public Gyro (Port p, MODE m) {
@@ -18,11 +19,13 @@ public class Gyro {
         sensor.reset();
         switch (m) {
             case RATE_MODE:
-                mode = "rate";
+                mode = m;
+                mode_str = "rate";
                 sampler = sensor.getRateMode();
                 break;
             case ANGLE_MODE:
-                mode = "angle";
+                mode = m;
+                mode_str = "angle";
                 sampler = sensor.getAngleMode();
                 break;
             default: 
@@ -31,12 +34,30 @@ public class Gyro {
                 System.exit(0);
         }
         sample_size = sampler.sampleSize();
-        out.println(mode + " : sample size = " + 
+        out.println(mode_str + " : sample size = " + 
+                    String.valueOf(sample_size));
+    }
+
+    public void reset() {
+        sensor.reset();
+        switch(mode) {
+            case RATE_MODE:
+                sampler = sensor.getRateMode();
+                break;
+            case ANGLE_MODE:
+                sampler = sensor.getAngleMode();
+                break;
+            default:
+                out.println("Sensor Mode was not set correctly ... quit.");
+                System.exit(0);
+        }
+        sample_size = sampler.sampleSize();
+        out.println(mode_str + " : sample size = " + 
                     String.valueOf(sample_size));
     }
 
     public String getMode() {
-        return mode;
+        return mode_str;
     }
         
     public float[] getSamples() {
