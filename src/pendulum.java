@@ -26,8 +26,12 @@ public class Pendulum {
 
     private float desired_angle;
 
-    private HashMap<String, Float> PID_params = new HashMap<String, Float>();
-    private Port[] sensor_ports = {SensorPort.S1, SensorPort.S2, SensorPort.S3, SensorPort.S4};
+    private HashMap<String, Float> PID_params = 
+        new HashMap<String, Float>();
+    private Port[] sensor_ports = {SensorPort.S1, 
+                                   SensorPort.S2, 
+                                   SensorPort.S3, 
+                                   SensorPort.S4};
 
     private int port_angle = -1;
     private int port_rate  = -1;
@@ -44,7 +48,7 @@ public class Pendulum {
 
         out.println("****************************************************");
         out.println("*                                                  *");
-        out.println("*    Initializing sensors and motors...            *");
+        out.println("*    Initializing sensors and motors ...           *");
         out.println("*                                                  *");
         out.println("****************************************************");
         Delay.msDelay(1000);
@@ -78,11 +82,14 @@ public class Pendulum {
             if (tokens.length == 2) {
                 if (tokens[0].equals("Kp")) {
                     out.println("here");
-                    PID_params.put("Kp", Float.parseFloat(tokens[1]));
+                    PID_params.put("Kp", 
+                                   Float.parseFloat(tokens[1]));
                 } else if (tokens[0].equals("Kd")) { 
-                    PID_params.put("Kd", Float.parseFloat(tokens[1]));
+                    PID_params.put("Kd", 
+                                   Float.parseFloat(tokens[1]));
                 } else if (tokens[0].equals("Ki")) { 
-                    PID_params.put("Ki", Float.parseFloat(tokens[1]));
+                    PID_params.put("Ki", 
+                                   Float.parseFloat(tokens[1]));
                 } else if (tokens[0].equals("angle")) {
                     port_angle = Integer.parseInt(tokens[1]);
                 } else if (tokens[0].equals("rate")) {
@@ -100,13 +107,18 @@ public class Pendulum {
         }
 
         out.println("PID parameters are: ");
-        out.println("    Kp = " + Float.toString(PID_params.get("Kp")));
-        out.println("    Kd = " + Float.toString(PID_params.get("Kd")));
-        out.println("    Ki = " + Float.toString(PID_params.get("Ki")));
+        out.println("    Kp = " + 
+                    Float.toString(PID_params.get("Kp")));
+        out.println("    Kd = " + 
+                    Float.toString(PID_params.get("Kd")));
+        out.println("    Ki = " + 
+                    Float.toString(PID_params.get("Ki")));
         out.println("");
 
-        out.println("Gyro angle port = " + String.valueOf(port_angle));
-        out.println("Gyro rate port  = " + String.valueOf(port_rate));
+        out.println("Gyro angle port = " + 
+                    String.valueOf(port_angle));
+        out.println("Gyro rate port  = " + 
+                    String.valueOf(port_rate));
     }
 
     public void init() {
@@ -171,5 +183,3 @@ public class Pendulum {
         }
     }
 }
-
-

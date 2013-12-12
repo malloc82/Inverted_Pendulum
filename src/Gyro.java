@@ -26,11 +26,13 @@ public class Gyro {
                 sampler = sensor.getAngleMode();
                 break;
             default: 
-                out.println("Invalid mode number : " + String.valueOf(m));
+                out.println("Invalid mode number : " + 
+                            String.valueOf(m));
                 System.exit(0);
         }
         sample_size = sampler.sampleSize();
-        out.println(mode + " : sample size = " + String.valueOf(sample_size));
+        out.println(mode + " : sample size = " + 
+                    String.valueOf(sample_size));
     }
 
     public String getMode() {

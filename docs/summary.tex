@@ -42,7 +42,7 @@ The goal of the system is to make the pendulum stay at upright position, not fal
 the pendulum's base back and forth when necessary. The only meaningful number we can give out is the
 desired angle for the pendulum, which is 0 degree. Due to the fact that we have linearized our model from a
 nonlinear model, system can only work for small angles. Which means when the pendulum lean too much,
-our model will be extremely inaccurate. Thus we have to make sure our system output's rise time has
+our model will be extremely inaccurate. Thus we have to make sure our system output's rise time
 to be as small as possible, oscillation is allowed as long as it eventually settles.
 
 
@@ -68,8 +68,8 @@ are coded in Java. The effect of our modeled transfer function is now the real p
 acceleration to the base of the pendulum, we should have an change of angle. So the real challenge
 here is to tune to PID controller to a state that come make the pendulum staying upright. 
 
-We have tried Ziegler–Nichols method, which start with tuning $Kp$, and a different method that
-start with tuning $Kd$. With the second method, the system have come to a state very close to
+We have tried Ziegler–Nichols method, which start with tuning $K_p$, and a different method that
+start with tuning $K_d$. With the second method, the system have come to a state very close to
 oscillating around center position. But due to time constrain and lack of experience we were unable
 to find a suitable parameters.
 
