@@ -127,9 +127,14 @@ public class Pendulum {
         float   current_angle   = 0;
         gyro_angle = new Gyro(sensor_ports[port_angle], Gyro.MODE.ANGLE_MODE);
         gyro_rate  = new Gyro(sensor_ports[port_rate],  Gyro.MODE.RATE_MODE);        
+        out.println("");
+        out.println("*****************************************");
+        out.println("*   Testing Gyro Sensor Sampling        *");
+        out.println("*****************************************");
+        out.println("");
         while (!angle_condition) {
             current_angle = (gyro_angle.getSamples())[0];
-            Delay.msDelay(1000);
+            Delay.msDelay(5000);
             // while (System.currentTimeMillis() <= curr_time + interval);
             if ((gyro_angle.getSamples())[0] - current_angle != 0)  {
                 out.println("");
