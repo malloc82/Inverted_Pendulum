@@ -124,19 +124,20 @@ public class Pendulum {
     public void init() {
         out.println("Initializing gyro sensors ... ");
         boolean angle_condition = false;
+        float   current_angle   = 0;
         gyro_angle = new Gyro(sensor_ports[port_angle], Gyro.MODE.ANGLE_MODE);
         gyro_rate  = new Gyro(sensor_ports[port_rate],  Gyro.MODE.RATE_MODE);        
         while (!angle_condition) {
-            long curr_time = System.currentTimeMillis();
-            long interval = 1000; // 1 second
-            float current_angle = (gyro_angle.getSamples())[0];
+            current_angle = (gyro_angle.getSamples())[0];
             Delay.msDelay(1000);
             // while (System.currentTimeMillis() <= curr_time + interval);
             if ((gyro_angle.getSamples())[0] - current_angle != 0)  {
+                out.println("");
                 out.println("*****************************************");
                 out.println("*   Angle sampling faulty.              *");
                 out.println("*   Reinitializing angle gyro sensor.   *");
                 out.println("*****************************************");
+                out.println("");
                 out.println("3");
                 Delay.msDelay(1000);
                 out.println("2");
@@ -147,9 +148,11 @@ public class Pendulum {
                 gyro_angle.reset();
                 gyro_rate.reset();
             } else {
+                out.println("");
                 out.println("*****************************************");
                 out.println("*       Angle sampling is ok.           *");
                 out.println("*****************************************");
+                out.println("");
                 angle_condition = true;
             }
         }
